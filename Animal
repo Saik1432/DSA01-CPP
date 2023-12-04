@@ -1,0 +1,40 @@
+#include <iostream>
+#include <string>
+
+class Animal {
+public:
+    virtual void speak() const = 0;  // Pure virtual function
+    virtual ~Animal() {}  
+};
+class Cat : public Animal {
+private:
+    std::string name;
+public:
+    Cat(const std::string& n) : name(n) {}
+    void speak() const override {
+        std::cout << "Meow! I am a cat named " << name << "." << std::endl;
+    }
+};
+class Dog : public Animal {
+private:
+    std::string name;
+public:
+    Dog(const std::string& n) : name(n) {}
+    void speak() const override {
+        std::cout << "Woof! I am a dog named " << name << "." << std::endl;
+    }
+};
+int main() {
+    std::string catName;
+    std::cout << "Enter Cat's name: ";
+    std::cin >> catName;
+    Cat cat(catName);
+    std::string dogName;
+    std::cout << "Enter Dog's name: ";
+    std::cin >> dogName;
+    Dog dog(dogName);
+    std::cout << "\n";
+    cat.speak();
+    dog.speak();
+    return 0;
+}
