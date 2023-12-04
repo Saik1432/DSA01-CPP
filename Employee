@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string>
+class Employee {
+public:
+    virtual double calculatePay() const = 0;  
+    virtual ~Employee() {}  
+};
+class Manager : public Employee {
+private:
+    std::string name;
+    double salary;
+public:
+    Manager(const std::string& n, double s) : name(n), salary(s) {}
+    double calculatePay() const override {
+        return salary;
+    }
+};
+class Engineer : public Employee {
+private:
+    std::string name;
+    double hourlyRate;
+    int hoursWorked;
+public:
+    Engineer(const std::string& n, double rate, int hours) : name(n), hourlyRate(rate), hoursWorked(hours) {}
+    double calculatePay() const override {
+        return hourlyRate * hoursWorked;
+    }
+};
+int main() {
+    std::string managerName;
+    double managerSalary;
+    std::cout << "Enter Manager's name: ";
+    std::cin >> managerName;
+    std::cout << "Enter Manager's salary: ";
+    std::cin >> managerSalary;
+    Manager manager(managerName, managerSalary);
+    std::string engineerName;
+    double hourlyRate;
+    int hoursWorked;
+    std::cout << "Enter Engineer's name: ";
+    std::cin >> engineerName;
+    std::cout << "Enter Engineer's hourly rate: ";
+    std::cin >> hourlyRate;
+    std::cout << "Enter number of hours worked by Engineer: ";
+    std::cin >> hoursWorked;
+    Engineer engineer(engineerName, hourlyRate, hoursWorked);
+    std::cout << "\nManager's Pay: $" << manager.calculatePay() << std::endl;
+    std::cout << "Engineer's Pay: $" << engineer.calculatePay() << std::endl;
+    return 0;
+}
